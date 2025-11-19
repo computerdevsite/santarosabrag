@@ -1,484 +1,170 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="utf-8" />
-<meta name="viewport" content="width=device-width,initial-scale=1" />
-<title>Ink All You Can - POS Mockup</title>
-<style>
-  :root{
-    --bg:#f2f2f2;
-    --panel:#fff;
-    --accent:#b9fca6; /* done */
-    --danger:#ffb6b6; /* pull out */
-    --primary:#111;
-    --muted:#666;
-  }
-  body{
-    margin:0;
-    font-family: "Segoe UI", Roboto, Arial, sans-serif;
-    background:var(--bg);
-    color:var(--primary);
-    -webkit-font-smoothing:antialiased;
-  }
-  .container{
-    max-width:980px;
-    margin:28px auto;
-    background:var(--panel);
-    border:6px solid #f0d66b;
-    box-shadow:0 6px 18px rgba(0,0,0,.08);
-    padding:18px;
-  }
-  .header{
-    text-align:center;
-    margin-bottom:8px;
-  }
-  .logo{
-    display:inline-block;
-    background:#000;
-    color:#fff;
-    padding:8px 18px;
-    font-weight:700;
-    letter-spacing:.6px;
-  }
-  .layout{
-    display:flex;
-    gap:18px;
-  }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SANTA ROSA BRAG</title>
+  <style>
+    /* --- Basic Reset & Fonts --- */
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: 'Arial', sans-serif;
+      background-color: #000;
+      color: #fff;
+      line-height: 1.6;
+    }
+    a { color: #fff; text-decoration: none; }
 
-  /* left form */
-  .left{
-    flex:0 0 420px;
-    padding:8px 12px;
-  }
-  .field{
-    display:flex;
-    align-items:center;
-    margin:10px 0;
-  }
-  .field label{
-    width:120px;
-    font-weight:700;
-    font-size:13px;
-    color:#222;
-  }
-  .field input[type="text"], .field input[type="date"], .field input[type="number"]{
-    flex:1;
-    padding:8px 10px;
-    border:1px solid #ccc;
-    border-radius:3px;
-    background:#fff;
-    font-size:14px;
-  }
-  .field textarea{
-    flex:1;
-    height:56px;
-    padding:8px 10px;
-    resize:vertical;
-    border:1px solid #ccc;
-    border-radius:3px;
-    font-size:14px;
-  }
+    /* --- Header --- */
+    header {
+      background-color: #111;
+      padding: 20px 0;
+      text-align: center;
+      border-bottom: 1px solid #333;
+    }
+    header h1 {
+      font-size: 2.5rem;
+      letter-spacing: 3px;
+    }
+    nav {
+      margin-top: 10px;
+    }
+    nav a {
+      margin: 0 15px;
+      font-weight: bold;
+      transition: color 0.3s;
+    }
+    nav a:hover {
+      color: #aaa;
+    }
 
-  .barcode-row{
-    display:flex;
-    gap:8px;
-    align-items:center;
-  }
-  .barcode-row input{flex:1}
-  .btn{
-    padding:10px 12px;
-    border-radius:4px;
-    border:none;
-    cursor:pointer;
-    font-weight:700;
-  }
-  .btn:active{transform:translateY(1px)}
-  .btn-add{background:#2b7a78;color:#fff}
-  .small{font-size:13px;color:var(--muted);font-weight:700}
+    /* --- Hero Section --- */
+    .hero {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 60vh;
+      text-align: center;
+      background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('https://images.unsplash.com/photo-1507874457470-272b3c8d8ee2?auto=format&fit=crop&w=1470&q=80') center/cover no-repeat;
+    }
+    .hero h2 {
+      font-size: 2rem;
+      margin-bottom: 10px;
+    }
+    .hero p {
+      font-size: 1.2rem;
+    }
 
-  /* right product checker */
-  .right{
-    flex:1;
-    display:flex;
-    flex-direction:column;
-    padding:8px 12px;
-  }
-  .checker{
-    border:1px solid #bbb;
-    height:340px;
-    overflow:auto;
-    padding:8px;
-    background:#fff;
-  }
-  .checker .item{
-    display:flex;
-    justify-content:space-between;
-    gap:12px;
-    padding:8px;
-    border-radius:4px;
-    margin-bottom:6px;
-    align-items:center;
-    cursor:pointer;
-  }
-  .checker .item:hover{background:#fafafa}
-  .checker .item.selected{background:#e9f7ff; box-shadow:inset 0 0 0 2px #cceeff}
-  .item .meta{font-size:13px}
-  .item .price{font-weight:700}
+    /* --- Music Section --- */
+    .music {
+      padding: 50px 20px;
+      max-width: 1000px;
+      margin: auto;
+    }
+    .music h2 {
+      text-align: center;
+      margin-bottom: 30px;
+      font-size: 2rem;
+      letter-spacing: 2px;
+    }
+    .track {
+      background-color: #111;
+      border: 1px solid #333;
+      padding: 20px;
+      margin-bottom: 20px;
+      border-radius: 8px;
+    }
+    .track h3 {
+      margin-bottom: 10px;
+    }
+    .track audio {
+      width: 100%;
+      outline: none;
+    }
 
-  .summary{
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    margin-top:12px;
-    padding:8px 6px;
-  }
-  .summary .label{font-weight:800; font-size:20px}
-  .summary .value{font-weight:800; font-size:20px}
-
-  .controls{
-    margin-top:12px;
-    display:flex;
-    gap:12px;
-    flex-direction:column;
-  }
-  .btn-done{
-    background:var(--accent);
-    border:2px solid rgba(0,0,0,.06);
-    color:#000;
-    padding:12px;
-    font-size:16px;
-    font-weight:800;
-    border-radius:3px;
-  }
-  .btn-pull{
-    background:var(--danger);
-    border:2px solid rgba(0,0,0,.06);
-    color:#000;
-    padding:10px;
-    font-size:14px;
-    font-weight:800;
-    border-radius:3px;
-  }
-
-  .note{font-size:12px;color:#666;margin-top:8px}
-
-  /* seller option buttons */
-  .seller-group {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 8px;
-  }
-
-  .seller-option {
-    position: relative;
-  }
-
-  .seller-option input[type="radio"] {
-    appearance: none;
-    -webkit-appearance: none;
-    -moz-appearance: none;
-    display: none;
-  }
-
-  .seller-option label {
-    display: inline-block;
-    padding: 10px 18px;
-    border: 2px solid #ccc;
-    border-radius: 8px;
-    background: #f9f9f9;
-    color: #333;
-    font-weight: 700;
-    cursor: pointer;
-    transition: all 0.2s ease;
-    user-select: none;
-  }
-
-  .seller-option input[type="radio"]:checked + label {
-    background: #b9fca6;
-    border-color: #333;
-    color: #000;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-  }
-
-  .seller-option label:hover {
-    background: #eefce6;
-  }
-
-  /* responsive */
-  @media (max-width:900px){
-    .layout{flex-direction:column}
-    .left{flex:1}
-  }
-</style>
+    /* --- Footer --- */
+    footer {
+      background-color: #111;
+      text-align: center;
+      padding: 20px;
+      border-top: 1px solid #333;
+      margin-top: 50px;
+    }
+    footer p {
+      font-size: 0.9rem;
+    }
+  </style>
 </head>
 <body>
-<div class="container" role="main">
-  <div class="header">
-    <div class="logo">ink all-you-can</div>
-  </div>
 
-  <div class="layout">
-    <div class="left">
-      <div class="field">
-        <label for="date">DATE</label>
-        <input id="date" type="date" />
-      </div>
+  <!-- Header -->
+  <header>
+    <h1>SANTA ROSA BRAG</h1>
+    <nav>
+      <a href="#music">Music</a>
+      <a href="#about">About</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </header>
 
-      <div class="field">
-        <label for="invoice">SALES INVOICE</label>
-        <input id="invoice" type="text" placeholder="INV-0001" />
-      </div>
+  <!-- Hero Section -->
+  <section class="hero">
+    <h2>Hip Hop & Rap Vibes</h2>
+    <p>Bringing beats and bars from Santa Rosa to the world</p>
+  </section>
 
-      <div class="field">
-        <label for="tin">TIN #</label>
-        <input id="tin" type="text" placeholder="TIN" />
-      </div>
+  <!-- Music Section -->
+  <section class="music" id="music">
+    <h2>Latest Tracks</h2>
 
-      <div class="field">
-        <label for="customer">CUSTOMER NAME</label>
-        <input id="customer" type="text" placeholder="Customer" />
-      </div>
-
-      <div class="field">
-        <label for="addr">ADDRESS</label>
-        <input id="addr" type="text" placeholder="Address" />
-      </div>
-
-      <div class="field barcode-row">
-        <label for="barcode">BARCODE</label>
-        <input id="barcode" type="text" placeholder="Type barcode and press Enter" />
-        <button class="btn btn-add" id="btnAdd">Add</button>
-      </div>
-
-      <div class="field">
-        <label for="product">PRODUCT</label>
-        <input id="product" type="text" placeholder="Optional product name" />
-      </div>
-
-      <div class="field">
-        <label for="service">SERVICE</label>
-        <input id="service" type="text" placeholder="Optional service" />
-      </div>
-
-      <div class="field" style="align-items:flex-start;">
-        <label>SELLER</label>
-        <div style="flex:1">
-          <div class="seller-group">
-            <div class="seller-option">
-              <input type="radio" name="seller" id="seller-buemio" value="BUEMIO" checked />
-              <label for="seller-buemio">BUEMIO</label>
-            </div>
-            <div class="seller-option">
-              <input type="radio" name="seller" id="seller-brozo" value="BROZO" />
-              <label for="seller-brozo">BROZO</label>
-            </div>
-            <div class="seller-option">
-              <input type="radio" name="seller" id="seller-arenas" value="ARENAS" />
-              <label for="seller-arenas">ARENAS</label>
-            </div>
-            <div class="seller-option">
-              <input type="radio" name="seller" id="seller-climaco" value="CLIMACO" />
-              <label for="seller-climaco">CLIMACO</label>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div class="note">
-        Tip: kung wala sa database ang barcode, papapasukin ka ng name at price para mai-save.
-      </div>
+    <div class="track">
+      <h3>Track 1: Hustle Hard</h3>
+      <audio controls>
+        <source src="track1.mp3" type="audio/mpeg">
+        Your browser does not support the audio element.
+      </audio>
     </div>
 
-    <div class="right">
-      <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:6px;">
-        <div style="font-weight:800">PRODUCT CHECKER</div>
-        <div style="font-size:12px;color:#777">Click item to select</div>
-      </div>
-
-      <div class="checker" id="checker">
-        <!-- items will appear here -->
-      </div>
-
-      <div class="summary">
-        <div class="label">TOTAL:</div>
-        <div class="value" id="total">0.00</div>
-      </div>
-
-      <div class="controls">
-        <button id="doneBtn" class="btn-done">DONE</button>
-        <button id="pullBtn" class="btn-pull">PULL OUT/TRANSFER</button>
-
-        <div style="display:flex; gap:12px; margin-top:6px;">
-          <button class="btn" id="clearBtn" style="background:#efefef">Clear Cart</button>
-          <button class="btn" id="showInv" style="background:#ddd">Show Invoices</button>
-          <button class="btn" id="showProducts" style="background:#ddd">Show Products</button>
-        </div>
-      </div>
-
-      <div id="debug" style="margin-top:12px;font-size:12px;color:#555"></div>
+    <div class="track">
+      <h3>Track 2: Shine Real Loud</h3>
+      <audio controls>
+        <source src="track2.mp3" type="audio/mpeg">
+        Your browser does not support the audio element.
+      </audio>
     </div>
-  </div>
-</div>
 
-<script>
-const $ = sel => document.querySelector(sel);
-const fmt = (v) => parseFloat(v).toFixed(2);
+    <div class="track">
+      <h3>Track 3: Streets & Dreams</h3>
+      <audio controls>
+        <source src="track3.mp3" type="audio/mpeg">
+        Your browser does not support the audio element.
+      </audio>
+    </div>
+  </section>
 
-const sampleProducts = {
-  "12345": { name: "Canon Ink Black", price: 350.00 },
-  "67890": { name: "Epson Ink Magenta", price: 300.00 },
-  "11111": { name: "HP Ink Cyan", price: 250.00 },
-  "22222": { name: "Brother Ink Set", price: 420.00 },
-  "33333": { name: "Paper A4 - 100s", price: 120.00 },
-  "44444": { name: "Print Service B/W", price: 25.00 },
-  "SF800": { name: "SERVICE FEE", price: 800.00 },
-  "SF400": { name: "SERVICE FEE", price: 400.00 }
-};
+  <!-- About Section -->
+  <section class="music" id="about">
+    <h2>About SANTA ROSA BRAG</h2>
+    <p style="text-align:center; max-width:700px; margin:auto;">
+      SANTA ROSA BRAG is a hip hop collective from Santa Rosa, representing the streets with authentic rap and original beats. We live and breathe music, inspiring our fans with every track.
+    </p>
+  </section>
 
-const STORAGE = {
-  PRODUCTS: "pos_products_v1",
-  CART: "pos_cart_v1",
-  INVOICES: "pos_invoices_v1",
-  TRANSFERS: "pos_transfers_v1",
-  SELLER: "pos_last_seller"
-};
+  <!-- Contact Section -->
+  <section class="music" id="contact">
+    <h2>Contact Us</h2>
+    <p style="text-align:center; max-width:700px; margin:auto;">
+      Email: santarosabrag@example.com<br>
+      Instagram: <a href="https://instagram.com/santarosabrag" target="_blank">@santarosabrag</a><br>
+      Facebook: <a href="https://facebook.com/santarosabrag" target="_blank">Santa Rosa Brag</a>
+    </p>
+  </section>
 
-function loadProducts(){
-  const raw = localStorage.getItem(STORAGE.PRODUCTS);
-  if(!raw){
-    localStorage.setItem(STORAGE.PRODUCTS, JSON.stringify(sampleProducts));
-    return {...sampleProducts};
-  }
-  try{
-    return JSON.parse(raw);
-  }catch(e){
-    localStorage.setItem(STORAGE.PRODUCTS, JSON.stringify(sampleProducts));
-    return {...sampleProducts};
-  }
-}
-function saveProducts(db){ localStorage.setItem(STORAGE.PRODUCTS, JSON.stringify(db)); }
-function loadCart(){ try{return JSON.parse(localStorage.getItem(STORAGE.CART))||[]}catch{return [];} }
-function saveCart(c){ localStorage.setItem(STORAGE.CART, JSON.stringify(c)); }
-function loadInvoices(){ try{return JSON.parse(localStorage.getItem(STORAGE.INVOICES))||[]}catch{return [];} }
-function saveInvoices(i){ localStorage.setItem(STORAGE.INVOICES, JSON.stringify(i)); }
-function loadTransfers(){ try{return JSON.parse(localStorage.getItem(STORAGE.TRANSFERS))||[]}catch{return [];} }
-function saveTransfers(t){ localStorage.setItem(STORAGE.TRANSFERS, JSON.stringify(t)); }
+  <!-- Footer -->
+  <footer>
+    <p>&copy; 2025 SANTA ROSA BRAG. All Rights Reserved.</p>
+  </footer>
 
-let products = loadProducts();
-let cart = loadCart();
-let selectedIndex = -1;
-
-const checker = $("#checker");
-const barcodeInput = $("#barcode");
-const totalEl = $("#total");
-const debug = $("#debug");
-
-function renderChecker(){
-  checker.innerHTML = "";
-  cart.forEach((it, idx) => {
-    const div = document.createElement("div");
-    div.className = "item" + (idx===selectedIndex ? " selected":"");
-    div.dataset.index = idx;
-    div.innerHTML = `<div>
-                      <div style="font-weight:700">${it.name}</div>
-                      <div class="meta" style="font-size:12px;color:#666">${it.barcode} • x${it.qty}</div>
-                    </div>
-                    <div style="text-align:right">
-                      <div class="price">?${fmt(it.price)}</div>
-                      <div style="font-size:12px;color:#666">?${fmt(it.price*it.qty)}</div>
-                    </div>`;
-    div.onclick = () => { selectedIndex = idx; renderChecker(); };
-    checker.appendChild(div);
-  });
-  updateTotal();
-}
-
-function updateTotal(){
-  const total = cart.reduce((s,it)=> s + (it.price * it.qty), 0);
-  totalEl.textContent = fmt(total);
-  debug.textContent = `Cart items: ${cart.length} • Products in DB: ${Object.keys(products).length}`;
-}
-
-function addByBarcode(code){
-  code = String(code||"").trim();
-  if(!code) return alert("Enter barcode first.");
-  if(products[code]){
-    const p = products[code];
-    const idx = cart.findIndex(x=>x.barcode===code);
-    if(idx>=0){ cart[idx].qty += 1; }
-    else { cart.push({ barcode: code, name: p.name, price: p.price, qty: 1 }); }
-    saveCart(cart); renderChecker();
-  } else {
-    const name = prompt("Barcode not in database. Enter product name for barcode " + code + ":","");
-    if(!name) return;
-    let price = parseFloat(prompt("Enter price (numeric) for " + name + ":","0"));
-    if(isNaN(price)||price<0) return alert("Invalid price.");
-    products[code]={name:name.trim(),price:price};
-    saveProducts(products);
-    cart.push({barcode:code,name:name.trim(),price:price,qty:1});
-    saveCart(cart); renderChecker();
-  }
-  barcodeInput.value="";
-  barcodeInput.focus();
-}
-
-$("#btnAdd").onclick=()=>addByBarcode(barcodeInput.value);
-barcodeInput.addEventListener("keydown",e=>{if(e.key==="Enter"){e.preventDefault();addByBarcode(barcodeInput.value);}});
-$("#clearBtn").onclick=()=>{if(confirm("Clear cart?")){cart=[];saveCart(cart);selectedIndex=-1;renderChecker();}};
-$("#pullBtn").onclick=()=>{
-  if(selectedIndex<0)return alert("Select item first.");
-  const item=cart[selectedIndex];
-  if(!confirm(`Pull out "${item.name}" (x${item.qty}) ?`))return;
-  const transfers=loadTransfers();
-  transfers.push({...item,date:new Date().toISOString()});
-  saveTransfers(transfers);
-  cart.splice(selectedIndex,1);
-  saveCart(cart);
-  selectedIndex=-1;
-  renderChecker();
-  alert("Item pulled/transferred.");
-};
-$("#doneBtn").onclick=()=>{
-  if(cart.length===0)return alert("Cart is empty.");
-  const seller=document.querySelector('input[name="seller"]:checked').value;
-  localStorage.setItem(STORAGE.SELLER,seller); // save last seller
-  const invoice={
-    date:$("#date").value||new Date().toISOString().slice(0,10),
-    invoiceNo:$("#invoice").value||("INV-"+Date.now()),
-    tin:$("#tin").value||"",
-    customer:$("#customer").value||"",
-    address:$("#addr").value||"",
-    service:$("#service").value||"",
-    items:cart.map(x=>({...x})),
-    seller,
-    total:fmt(cart.reduce((s,it)=>s+it.price*it.qty,0)),
-    timestamp:new Date().toISOString()
-  };
-  const invs=loadInvoices(); invs.push(invoice); saveInvoices(invs);
-  cart=[]; saveCart(cart); selectedIndex=-1; renderChecker();
-  $("#invoice").value=""; $("#service").value="";
-  alert("Invoice saved in browser.");
-};
-$("#showInv").onclick=()=>{
-  const invs=loadInvoices();
-  if(!invs.length)return alert("No invoices yet.");
-  alert("Saved Invoices:\n\n"+invs.map((x,i)=>`${i+1}. ${x.invoiceNo} • ${x.customer} • ?${x.total} • ${x.date}`).join("\n"));
-};
-$("#showProducts").onclick=()=>{
-  const p=Object.keys(products);
-  alert("Products in DB:\n\n"+p.slice(0,200).map(k=>`${k} ?${fmt(products[k].price)} • ${products[k].name}`).join("\n"));
-};
-
-(function init(){
-  const today=new Date().toISOString().slice(0,10);
-  $("#date").value=today;
-  products=loadProducts(); cart=loadCart(); renderChecker();
-  const lastSeller=localStorage.getItem(STORAGE.SELLER);
-  if(lastSeller){
-    const selEl=document.querySelector(`input[name="seller"][value="${lastSeller}"]`);
-    if(selEl) selEl.checked=true;
-  }
-})();
-</script>
 </body>
 </html>
